@@ -26,6 +26,7 @@ extension Binary.LEB128 {
     /// If the encoded value exceeds the target type's bit width,
     /// throws `Binary.LEB128.Error.overflow`.
     public struct Unsigned<T: UnsignedInteger & FixedWidthInteger>: Sendable {
+        /// Creates an unsigned LEB128 parser.
         @inlinable
         public init() {}
     }
@@ -34,11 +35,21 @@ extension Binary.LEB128 {
 // MARK: - Parser.Parser
 
 extension Binary.LEB128.Unsigned: Parser.`Protocol` {
+    /// Parsing consumes from a byte slice.
     public typealias Input = ArraySlice<Byte>
+    /// Parsing produces the target unsigned integer type.
     public typealias Output = T
+    /// Parsing throws ``Binary/LEB128/Error``.
     public typealias Failure = Binary.LEB128.Error
+    /// The composed-parser body; this parser is a leaf with no sub-parsers, so it is `Never`.
     public typealias Body = Never
 
+    /// Parses an unsigned LEB128 integer from the front of the input.
+    ///
+    /// - Parameter input: The byte slice to consume from; parsed bytes are removed.
+    /// - Returns: The decoded unsigned integer.
+    /// - Throws: `Binary.LEB128.Error.unterminated` if the input ends before the
+    ///   final byte, or `.overflow` if the value exceeds `T`'s bit width.
     @inlinable
     public func parse(_ input: inout Input) throws(Failure) -> T {
         var result: T = 0

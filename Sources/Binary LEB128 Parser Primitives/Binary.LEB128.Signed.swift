@@ -28,6 +28,7 @@ extension Binary.LEB128 {
     /// - If set (1), the remaining high bits are filled with 1s
     /// - If clear (0), the remaining high bits are filled with 0s
     public struct Signed<T: SignedInteger & FixedWidthInteger>: Sendable {
+        /// Creates a signed LEB128 parser.
         @inlinable
         public init() {}
     }
@@ -36,11 +37,21 @@ extension Binary.LEB128 {
 // MARK: - Parser.Parser
 
 extension Binary.LEB128.Signed: Parser.`Protocol` {
+    /// Parsing consumes from a byte slice.
     public typealias Input = ArraySlice<Byte>
+    /// Parsing produces the target signed integer type.
     public typealias Output = T
+    /// Parsing throws ``Binary/LEB128/Error``.
     public typealias Failure = Binary.LEB128.Error
+    /// The composed-parser body; this parser is a leaf with no sub-parsers, so it is `Never`.
     public typealias Body = Never
 
+    /// Parses a signed LEB128 integer from the front of the input, sign-extending the final byte.
+    ///
+    /// - Parameter input: The byte slice to consume from; parsed bytes are removed.
+    /// - Returns: The decoded signed integer.
+    /// - Throws: `Binary.LEB128.Error.unterminated` if the input ends before the
+    ///   final byte, or `.overflow` if the value exceeds `T`'s bit width.
     @inlinable
     public func parse(_ input: inout Input) throws(Failure) -> T {
         var result: T = 0
