@@ -8,8 +8,8 @@ import Testing
 // Note: Binary.LEB128.Unsigned<T> is generic, so per [TEST-004] we use
 // parallel namespace pattern instead of type extension pattern.
 
-@Suite("Binary.LEB128.Unsigned")
-struct LEB128UnsignedTests {
+@Suite
+struct `Binary.LEB128.Unsigned Tests` {
     @Suite struct Unit {}
     @Suite struct EdgeCase {}
     @Suite struct Integration {}
@@ -18,7 +18,7 @@ struct LEB128UnsignedTests {
 
 // MARK: - Unsigned Unit Tests
 
-extension LEB128UnsignedTests.Unit {
+extension `Binary.LEB128.Unsigned Tests`.Unit {
 
     @Test
     func `parse single byte value`() throws {
@@ -96,7 +96,7 @@ extension LEB128UnsignedTests.Unit {
 
 // MARK: - Unsigned EdgeCase Tests
 
-extension LEB128UnsignedTests.EdgeCase {
+extension `Binary.LEB128.Unsigned Tests`.EdgeCase {
 
     @Test
     func `parse empty input throws unterminated`() {
@@ -144,8 +144,8 @@ extension LEB128UnsignedTests.EdgeCase {
 // Note: Binary.LEB128.Signed<T> is generic, so per [TEST-004] we use
 // parallel namespace pattern instead of type extension pattern.
 
-@Suite("Binary.LEB128.Signed")
-struct LEB128SignedTests {
+@Suite
+struct `Binary.LEB128.Signed Tests` {
     @Suite struct Unit {}
     @Suite struct EdgeCase {}
     @Suite struct Integration {}
@@ -154,7 +154,7 @@ struct LEB128SignedTests {
 
 // MARK: - Signed Unit Tests
 
-extension LEB128SignedTests.Unit {
+extension `Binary.LEB128.Signed Tests`.Unit {
 
     @Test
     func `parse zero`() throws {
@@ -230,7 +230,7 @@ extension LEB128SignedTests.Unit {
 
 // MARK: - Signed EdgeCase Tests
 
-extension LEB128SignedTests.EdgeCase {
+extension `Binary.LEB128.Signed Tests`.EdgeCase {
 
     @Test
     func `parse empty input throws unterminated`() {
