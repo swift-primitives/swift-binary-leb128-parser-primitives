@@ -19,6 +19,6 @@ let value = try parser.parse(&input)   // 624485
 - **Owner-independent leaf.** Depends only on `swift-parser-primitives` + `swift-binary-leb128-primitives` (+ `swift-byte-primitives`) — NOT on `swift-binary-parser-primitives`. So there is no package cycle: the generic binary parser and this integration both compose downward onto the LEB128 mechanism.
 - **One decode source of truth.** `parse(_:)` delegates to `Binary.LEB128.Decode`, the single shared decode core that the binary `Machine`/`Borrowed` interpreters also use. Strict over-long contract (rejects non-minimal encodings, per WebAssembly).
 
-## Provenance
+## License
 
-Extracted from `swift-binary-parser-primitives` on 2026-05-30 (LEB128 decomposition, Phase 4) per [`swift-institute/Research/binary-primitives-package-decomposition.md`](https://github.com/swift-institute) and the extract-integration-by-default discipline.
+Apache 2.0. See [LICENSE.md](LICENSE.md).
