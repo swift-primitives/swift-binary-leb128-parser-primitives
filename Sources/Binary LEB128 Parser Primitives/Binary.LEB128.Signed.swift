@@ -64,7 +64,9 @@ extension Binary.LEB128.Signed: Parser.`Protocol` {
             // Delegate to the shared decode core (Binary LEB128 Decode Primitives);
             // the signed step self-contains two's-complement sign extension.
             if try Binary.LEB128.Decode.signed(
-                byte: byte.underlying, into: &result, shift: &shift
+                byte: byte.underlying,
+                into: &result,
+                shift: &shift
             ) {
                 return result
             }
