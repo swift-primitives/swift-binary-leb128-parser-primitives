@@ -61,7 +61,11 @@ extension Binary.LEB128.Unsigned: Parser.`Protocol` {
             input.removeFirst()
             // Delegate to the shared decode core (Binary LEB128 Decode Primitives).
             // Bridge Byte -> UInt8 once at this unpacking boundary per [API-BYTE-004].
-            if try Binary.LEB128.Decode.unsigned(byte: byte.underlying, into: &result, shift: &shift) {
+            if try Binary.LEB128.Decode.unsigned(
+                byte: byte.underlying,
+                into: &result,
+                shift: &shift
+            ) {
                 return result
             }
         }

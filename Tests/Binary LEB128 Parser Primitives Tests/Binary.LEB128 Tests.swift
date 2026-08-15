@@ -11,7 +11,7 @@ import Testing
 @Suite
 struct `Binary.LEB128.Unsigned Tests` {
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
@@ -96,7 +96,7 @@ extension `Binary.LEB128.Unsigned Tests`.Unit {
 
 // MARK: - Unsigned EdgeCase Tests
 
-extension `Binary.LEB128.Unsigned Tests`.EdgeCase {
+extension `Binary.LEB128.Unsigned Tests`.`Edge Case` {
 
     @Test
     func `parse empty input throws unterminated`() {
@@ -147,7 +147,7 @@ extension `Binary.LEB128.Unsigned Tests`.EdgeCase {
 @Suite
 struct `Binary.LEB128.Signed Tests` {
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
@@ -230,7 +230,7 @@ extension `Binary.LEB128.Signed Tests`.Unit {
 
 // MARK: - Signed EdgeCase Tests
 
-extension `Binary.LEB128.Signed Tests`.EdgeCase {
+extension `Binary.LEB128.Signed Tests`.`Edge Case` {
 
     @Test
     func `parse empty input throws unterminated`() {
