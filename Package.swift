@@ -1,15 +1,15 @@
-// swift-tools-version: 6.3.3
+// swift-tools-version: 6.4
 
 import PackageDescription
 
 let package = Package(
     name: "swift-binary-leb128-parser-primitives",
     platforms: [
-        .macOS("27"),
-        .iOS("27"),
-        .tvOS("27"),
-        .watchOS("27"),
-        .visionOS("27"),
+        .macOS(.v27),
+        .iOS(.v27),
+        .tvOS(.v27),
+        .watchOS(.v27),
+        .visionOS(.v27),
     ],
     products: [
         .library(
@@ -26,23 +26,35 @@ let package = Package(
         // from swift-parser-primitives + the LEB128 namespace/Error/decode core from
         // swift-binary-leb128-primitives. No dep on swift-binary-parser-primitives,
         // so there is no [MOD-032] package cycle.
-        .package(url: "https://github.com/swift-primitives/swift-parser-primitives.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-binary-leb128-primitives.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-byte-primitives.git", branch: "main"),
+        .package(
+            url: "https://github.com/swift-primitives/swift-parser-primitives.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-primitives/swift-binary-leb128-primitives.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-primitives/swift-byte-primitives.git",
+            branch: "main"
+        ),
     ],
     targets: [
         .target(
             name: "Binary LEB128 Parser Primitives",
             dependencies: [
                 .product(name: "Parser Primitives", package: "swift-parser-primitives"),
-                .product(name: "Binary LEB128 Decode Primitives", package: "swift-binary-leb128-primitives"),
+                .product(
+                    name: "Binary LEB128 Decode Primitives",
+                    package: "swift-binary-leb128-primitives"
+                ),
                 .product(name: "Byte Primitives", package: "swift-byte-primitives"),
             ]
         ),
         .target(
             name: "Binary LEB128 Parser Primitives Test Support",
             dependencies: [
-                "Binary LEB128 Parser Primitives",
+                "Binary LEB128 Parser Primitives"
             ],
             path: "Tests/Support"
         ),
