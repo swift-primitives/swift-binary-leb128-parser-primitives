@@ -22,10 +22,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        // Owner-independent leaf ([MOD-014] integration package): Parser.`Protocol`
-        // from swift-parser-primitives + the LEB128 namespace/Error/decode core from
-        // swift-binary-leb128-primitives. No dep on swift-binary-parser-primitives,
-        // so there is no [MOD-032] package cycle.
+
         .package(
             url: "https://github.com/swift-primitives/swift-parser-primitives.git",
             branch: "main"

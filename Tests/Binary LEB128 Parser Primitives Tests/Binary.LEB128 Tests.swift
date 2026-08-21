@@ -3,11 +3,6 @@ import Binary_LEB128_Parser_Primitives_Test_Support
 import Byte_Primitives
 import Testing
 
-// MARK: - Binary.LEB128.Unsigned Tests
-
-// Note: Binary.LEB128.Unsigned<T> is generic, so per [TEST-004] we use
-// parallel namespace pattern instead of type extension pattern.
-
 @Suite
 struct `Binary.LEB128.Unsigned Tests` {
     @Suite struct Unit {}
@@ -15,8 +10,6 @@ struct `Binary.LEB128.Unsigned Tests` {
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
-
-// MARK: - Unsigned Unit Tests
 
 extension `Binary.LEB128.Unsigned Tests`.Unit {
 
@@ -53,7 +46,7 @@ extension `Binary.LEB128.Unsigned Tests`.Unit {
 
     @Test
     func `parse known value 624485`() throws {
-        // 624485 encodes as [0xE5, 0x8E, 0x26]
+
         let parser = Binary.LEB128.Unsigned<UInt64>()
         var input: ArraySlice<Byte> = [0xE5, 0x8E, 0x26][...]
 
@@ -94,8 +87,6 @@ extension `Binary.LEB128.Unsigned Tests`.Unit {
     }
 }
 
-// MARK: - Unsigned EdgeCase Tests
-
 extension `Binary.LEB128.Unsigned Tests`.`Edge Case` {
 
     @Test
@@ -111,7 +102,7 @@ extension `Binary.LEB128.Unsigned Tests`.`Edge Case` {
     @Test
     func `parse unterminated sequence throws`() {
         let parser = Binary.LEB128.Unsigned<UInt64>()
-        var input: ArraySlice<Byte> = [0x80][...]  // continuation bit set, no following byte
+        var input: ArraySlice<Byte> = [0x80][...]
 
         #expect(throws: Binary.LEB128.Error.self) {
             try parser.parse(&input)
@@ -121,7 +112,7 @@ extension `Binary.LEB128.Unsigned Tests`.`Edge Case` {
     @Test
     func `parse overflow throws for UInt8`() {
         let parser = Binary.LEB128.Unsigned<UInt8>()
-        var input: ArraySlice<Byte> = [0x80, 0x02][...]  // 256, overflows UInt8
+        var input: ArraySlice<Byte> = [0x80, 0x02][...]
 
         #expect(throws: Binary.LEB128.Error.self) {
             try parser.parse(&input)
@@ -139,11 +130,6 @@ extension `Binary.LEB128.Unsigned Tests`.`Edge Case` {
     }
 }
 
-// MARK: - Binary.LEB128.Signed Tests
-
-// Note: Binary.LEB128.Signed<T> is generic, so per [TEST-004] we use
-// parallel namespace pattern instead of type extension pattern.
-
 @Suite
 struct `Binary.LEB128.Signed Tests` {
     @Suite struct Unit {}
@@ -151,8 +137,6 @@ struct `Binary.LEB128.Signed Tests` {
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
-
-// MARK: - Signed Unit Tests
 
 extension `Binary.LEB128.Signed Tests`.Unit {
 
@@ -169,7 +153,7 @@ extension `Binary.LEB128.Signed Tests`.Unit {
     @Test
     func `parse positive single byte`() throws {
         let parser = Binary.LEB128.Signed<Int64>()
-        var input: ArraySlice<Byte> = [0x3F][...]  // 63
+        var input: ArraySlice<Byte> = [0x3F][...]
 
         let value = try parser.parse(&input)
 
@@ -199,7 +183,7 @@ extension `Binary.LEB128.Signed Tests`.Unit {
     @Test
     func `parse positive two byte value`() throws {
         let parser = Binary.LEB128.Signed<Int64>()
-        var input: ArraySlice<Byte> = [0x80, 0x01][...]  // 128
+        var input: ArraySlice<Byte> = [0x80, 0x01][...]
 
         let value = try parser.parse(&input)
 
@@ -228,8 +212,6 @@ extension `Binary.LEB128.Signed Tests`.Unit {
     }
 }
 
-// MARK: - Signed EdgeCase Tests
-
 extension `Binary.LEB128.Signed Tests`.`Edge Case` {
 
     @Test
@@ -255,7 +237,7 @@ extension `Binary.LEB128.Signed Tests`.`Edge Case` {
     @Test
     func `parse Int8 min value`() throws {
         let parser = Binary.LEB128.Signed<Int8>()
-        var input: ArraySlice<Byte> = [0x80, 0x7F][...]  // -128
+        var input: ArraySlice<Byte> = [0x80, 0x7F][...]
 
         let value = try parser.parse(&input)
 
@@ -265,7 +247,7 @@ extension `Binary.LEB128.Signed Tests`.`Edge Case` {
     @Test
     func `parse Int8 max value`() throws {
         let parser = Binary.LEB128.Signed<Int8>()
-        var input: ArraySlice<Byte> = [0xFF, 0x00][...]  // 127
+        var input: ArraySlice<Byte> = [0xFF, 0x00][...]
 
         let value = try parser.parse(&input)
 
