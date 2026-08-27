@@ -1,6 +1,6 @@
-import Binary_LEB128_Parser_Primitives
-import Binary_LEB128_Parser_Primitives_Test_Support
-import Byte_Primitives
+import Binary_LEB128_Parser
+import Binary_LEB128_Parser_Test_Support
+import Byte
 import Testing
 
 @Suite

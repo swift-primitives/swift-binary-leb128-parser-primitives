@@ -3,7 +3,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-binary-leb128-parser-primitives",
+    name: "swift-binary-leb128-parser",
     platforms: [
         .macOS(.v27),
         .iOS(.v27),
@@ -13,53 +13,53 @@ let package = Package(
     ],
     products: [
         .library(
-            name: "Binary LEB128 Parser Primitives",
-            targets: ["Binary LEB128 Parser Primitives"]
+            name: "Binary LEB128 Parser",
+            targets: ["Binary LEB128 Parser"]
         ),
         .library(
-            name: "Binary LEB128 Parser Primitives Test Support",
-            targets: ["Binary LEB128 Parser Primitives Test Support"]
+            name: "Binary LEB128 Parser Test Support",
+            targets: ["Binary LEB128 Parser Test Support"]
         ),
     ],
     dependencies: [
 
         .package(
-            url: "https://github.com/swift-primitives/swift-parser-primitives.git",
+            url: "https://github.com/swift-molecules/swift-parser.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-binary-leb128-primitives.git",
+            url: "https://github.com/swift-molecules/swift-binary-leb128.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-byte-primitives.git",
+            url: "https://github.com/swift-molecules/swift-byte.git",
             branch: "main"
         ),
     ],
     targets: [
         .target(
-            name: "Binary LEB128 Parser Primitives",
+            name: "Binary LEB128 Parser",
             dependencies: [
-                .product(name: "Parser Primitives", package: "swift-parser-primitives"),
+                .product(name: "Parser", package: "swift-parser"),
                 .product(
-                    name: "Binary LEB128 Decode Primitives",
-                    package: "swift-binary-leb128-primitives"
+                    name: "Binary LEB128 Decode",
+                    package: "swift-binary-leb128"
                 ),
-                .product(name: "Byte Primitives", package: "swift-byte-primitives"),
+                .product(name: "Byte", package: "swift-byte"),
             ]
         ),
         .target(
-            name: "Binary LEB128 Parser Primitives Test Support",
+            name: "Binary LEB128 Parser Test Support",
             dependencies: [
-                "Binary LEB128 Parser Primitives"
+                "Binary LEB128 Parser"
             ],
             path: "Tests/Support"
         ),
         .testTarget(
-            name: "Binary LEB128 Parser Primitives Tests",
+            name: "Binary LEB128 Parser Tests",
             dependencies: [
-                "Binary LEB128 Parser Primitives",
-                "Binary LEB128 Parser Primitives Test Support",
+                "Binary LEB128 Parser",
+                "Binary LEB128 Parser Test Support",
             ]
         ),
     ],

@@ -1,7 +1,7 @@
 # .github/metadata.yaml
 description: "Parser adapters for LEB128 variable-length integers — Binary.LEB128.Unsigned<T> and Binary.LEB128.Signed<T> confer Parser.Protocol onto the shared LEB128 decode core."
 topics:
-  - primitives
+  - molecules
   - leb128
   - parser
   - binary
